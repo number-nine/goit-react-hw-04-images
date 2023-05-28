@@ -1,42 +1,35 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 
 import Modal from 'components/Modal';
 import css from './ImageGalleryItem.module.css';
 
-class ImageGalleryItem extends Component {
-  state = {
-    isModalShown: false,
+const ImageGalleryItem = ({ src, alt, ...transitProps }) => {
+  const [isModalShown, setIsModalShown] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalShown(false);
   };
 
-  handleModalClose = e => {
-    // if (e.target === e.currentTarget) {
-    this.setState({ isModalShown: false });
-    // }
+  const handleModalOpen = () => {
+    setIsModalShown(true);
   };
 
-  handleModalOpen = () => {
-    this.setState({ isModalShown: true });
-  };
+  return (
+    <li className={css.ImageGalleryItem}>
+      <img
+        src={src}
+        alt={alt}
+        className={css.ImageGalleryItemImage}
+        onClick={handleModalOpen}
+      />
+      {isModalShown && (
+        <Modal alt={alt} onClose={handleModalClose} {...transitProps} />
+      )}
+    </li>
+  );
+};
 
-  render() {
-    const { src, alt, ...transitProps } = this.props;
-    const { isModalShown } = this.state;
-    return (
-      <li className={css.ImageGalleryItem}>
-        <img
-          src={src}
-          alt={alt}
-          className={css.ImageGalleryItemImage}
-          onClick={this.handleModalOpen}
-        />
-        {isModalShown && (
-          <Modal alt={alt} onClose={this.handleModalClose} {...transitProps} />
-        )}
-      </li>
-    );
-  }
-}
 
 ImageGalleryItem.propTypes = {
   src: PropTypes.string.isRequired,
