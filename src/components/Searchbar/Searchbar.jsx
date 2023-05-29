@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import css from './Searchbar.module.css';
 
-const Searchbar = ({ isLoading, onSubmit }) => {
+const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleChangeQuery = e => {
@@ -36,7 +36,7 @@ const Searchbar = ({ isLoading, onSubmit }) => {
         <button
           type="submit"
           className={css.SearchFormButton}
-          disabled={isLoading}
+          // disabled={isLoading}
         >
           <span className={css.SearchFormButtonLabel}>Search</span>
         </button>
@@ -50,7 +50,7 @@ const Searchbar = ({ isLoading, onSubmit }) => {
           name="query"
           value={query}
           onChange={handleChangeQuery}
-          disabled={isLoading}
+          // disabled={isLoading}
         />
       </form>
     </header>
@@ -59,7 +59,7 @@ const Searchbar = ({ isLoading, onSubmit }) => {
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  // isLoading: PropTypes.bool.isRequired,
 };
 
 export default Searchbar;

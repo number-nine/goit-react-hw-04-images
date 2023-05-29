@@ -5,29 +5,18 @@ import ImageGallery from 'components/ImageGallery';
 import css from './App.module.css';
 
 const App = () => {
-  const [query, setQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState({ value :''});
 
-   const handleQuery = query => {
-      setQuery(query);
-      setIsLoading(true);
-    };
+  const handleQuery = value => {
+    setQuery({value});
+  };
 
   return (
     <div className={css.App}>
-      <Searchbar onSubmit={handleQuery} isLoading={isLoading} />
-      <ImageGallery
-        query={query}
-        isLoading={isLoading}
-        onLoadingStart={() => {
-          setIsLoading(true);
-        }}
-        onLoadingComplete={() => {
-          setIsLoading(false);
-        }}
-      />
+      <Searchbar onSubmit={handleQuery} />
+      <ImageGallery query={query} />
     </div>
   );
-}
+};
 
 export default App;

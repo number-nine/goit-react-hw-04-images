@@ -6,19 +6,21 @@ import css from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({image, alt, onClose}) => {
-
-  const handleClose = useCallback( e => {
-    if (e.code === 'Escape' || e.target === e.currentTarget) {
-      onClose();
-    }
-  },[onClose]) 
+const Modal = ({ image, alt, onClose }) => {
+  const handleClose = useCallback(
+    e => {
+      if (e.code === 'Escape' || e.target === e.currentTarget) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     console.log('create listener');
     window.addEventListener('keydown', handleClose);
     return () => {
-      console.log('dispose listener');
+      console.log('remove listener');
       window.removeEventListener('keydown', handleClose);
     };
   }, [handleClose]);

@@ -20,3 +20,5 @@ export default async function getPictures({ page, query: q, perPage: per_page })
     Notify.info(`Remote data unavailable. ${error.message}. Please try again later.`);
   }
 }
+
+
