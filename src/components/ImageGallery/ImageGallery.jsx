@@ -23,11 +23,11 @@ const ImageGallery = ({ query }) => {
   }
 
   useEffect(() => {
-    if (!value) {
+    if (!value || !isLoading) {
+      setIsLoading(false);
+      console.log('first render');
       return;
     }
-
-    setIsLoading(true);
 
     getPictures({ page: page, query: value, perPage })
       .then(({ hits, total }) => {
@@ -40,17 +40,20 @@ const ImageGallery = ({ query }) => {
         );
       })
       .finally(() => setIsLoading(false));
-  }, [page, value, query]);
+  }, [page, value, isLoading]);
 
   useEffect(() => {
+    console.log('new query');
     setCurrentData([]);
     setPage(1);
     setTotal(0);
+    setIsLoading(true);
     
   }, [query]);
 
   const handleLoadMore = () => {
     setPage(state => state + 1);
+    setIsLoading(true);
   };
 
   return (
